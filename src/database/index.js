@@ -11,7 +11,7 @@ module.exports.Database = (collection)=> new Promise (async(resolve,reject)=>{
         if (!connection) {
             const client = new MongoClient(Config.mongoUri)
             connection = await client.connect()
-            debug ('Nueva coneccion realizada con MongoDB Atlas')
+            debug ('Nueva conexion realizada con MongoDB Atlas')
         }
         debug ('Reutilizando conexion')
         const db= connection.db(Config.mongoDbname)
