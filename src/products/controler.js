@@ -2,11 +2,10 @@ const createError = require('http-errors')
 
 const debug = require('debug')('app:module-products-controller')
 
-const { request } = require('express')
-
 const {ProductsService} = require ('./services')
 
 const {Response} = require ('../common/response')
+const { ObjectId } = require('mongodb')
 
 
 
@@ -60,6 +59,46 @@ module.exports.ProductsController ={
             Response.error(res)
         }
     },
+
+
+    updateProduct: async (req, res) => {
+        try {
+            const {params: {id}} = req
+            const {body} =req 
+            const update = await ProductsService.update(id,body)
+            Response.succes(res,201, 'Producto modificado', update)
+
+
+
+        } catch (error) {
+            debug(error)
+            Response.error(res)
+        }
+    },
+
+    deleteProduct : async(req,res)=> {
+        try {
+            
+        } catch (error) {
+            debug(error)
+            Response.error(res)
+        }
+    },
+
+    generateReport : (req,res)=> {
+        try {
+            ProductsService.generateReport('Inventario',res)
+
+            
+        } catch (error) {
+            debug(error)
+            Response.error(res)
+        }
+    },
+
+
+
+
 }
 
 
