@@ -7,6 +7,11 @@ const { UserAPI } = require ('./src/users')
 const app = express()
 
 app.use (express.json())
+app.use (express.urlencoded({extended: true}))  // este middleware sirve para enviar datos atravez de formularios
+app.use (express.static('./src/public'))
+
+
+
 
 //modulos
 
