@@ -65,9 +65,12 @@ module.exports.ProductsController ={
         try {
             const {params: {id}} = req
             const {body} =req 
-            const update = await ProductsService.update(id,body)
-            Response.succes(res,201, 'Producto modificado', update)
-
+            const update = await ProductsService.update(id, body)
+            if (!update) {
+                Response.error(res, new createError.NotFound());
+                } else {
+                Response.succes(res, 200, `Producto ${id} modificado`, Object(body));
+                }
 
 
         } catch (error) {

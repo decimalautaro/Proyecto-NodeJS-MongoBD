@@ -23,9 +23,13 @@ const create = async (product)=>{
     return result.insertedId
 }
 
-const update = async (id, product) => {
+const update = async ( id, product) => {
     const collection = await Database(COLLECTION);
-    let result = await collection.updateOne({_id: ObjectId(id)}, { $set: { ...product } });
+    let result = await collection.updateOne(
+        {_id: ObjectId(id)}, // filtro para actualizar product
+        {$set: {...product}}, // creacion documento a actualizar
+        { upsert: false } //esta opción indica al método que cree un documento si ningún documento coincide con el filtro
+    )
     return result
 
 }
