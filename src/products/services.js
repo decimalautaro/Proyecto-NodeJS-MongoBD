@@ -34,8 +34,12 @@ const update = async ( id, product) => {
 
 }
 
-const eliminar = async (product)=>{
+const eliminar = async (id)=>{
     const collection = await Database(COLLECTION )
+    let result = await collection.deleteOne({_id: ObjectId(id)})
+    return result
+
+
 }
 
 

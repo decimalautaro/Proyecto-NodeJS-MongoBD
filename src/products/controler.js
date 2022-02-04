@@ -81,7 +81,17 @@ module.exports.ProductsController ={
 
     deleteProduct : async(req,res)=> {
         try {
-            
+            const {params: {id}} = req
+            const {body} =req 
+            const eliminar = await ProductsService.eliminar(id)
+            if (eliminar.deleteCount === 1) {
+                Response.error(res, new createError.NotFound());
+                
+                } else {
+                    Response.succes(res, 200, `Producto con ID: ${id} eliminado`, Object(body));
+                }
+
+
         } catch (error) {
             debug(error)
             Response.error(res)
